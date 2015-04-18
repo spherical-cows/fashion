@@ -1,18 +1,10 @@
-var Game, atom, c, cancelAnimationFrame, eventCode, i, ref, ref1, requestAnimationFrame,
+var Game, atom, c, eventCode, i, ref, ref1,
     indexOf = [].indexOf || function(item) {
         for (var i = 0, l = this.length; i < l; i++) {
             if (i in this && this[i] === item) return i;
         }
         return -1;
     };
-
-requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
-    return window.setTimeout((function() {
-        return callback(1000 / 60);
-    }), 1000 / 60);
-};
-
-cancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || window.clearTimeout;
 
 window.atom = atom = {};
 
@@ -226,9 +218,9 @@ Game = (function() {
 
 atom.Game = Game;
 
-atom.audioContext = typeof webkitAudioContext === "function" ? new webkitAudioContext() : void 0;
+atom.audioContext = typeof AudioContext === "function" ? new AudioContext() : void 0;
 
-atom._mixer = (ref = atom.audioContext) != null ? ref.createGainNode() : void 0;
+atom._mixer = (ref = atom.audioContext) != null ? ref.createGain() : void 0;
 
 if ((ref1 = atom._mixer) != null) {
     ref1.connect(atom.audioContext.destination);
